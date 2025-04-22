@@ -16,11 +16,7 @@ def predict():
     file = request.files['file']
     image = Image.open(file.stream)
 
-    results = model.predict(image)
-    json_output = results[0].json()
-
-    filtered = [{"name": item["name"], "confidence": item["confidence"]} for item in json_output]
-    return jsonify(filtered)
+    return image
 
 @app.route("/", methods=["GET"])
 def home():
