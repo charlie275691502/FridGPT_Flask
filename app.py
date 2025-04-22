@@ -16,12 +16,10 @@ def predict():
     file = request.files['file']
     image = Image.open(file.stream)
 
-    return jsonify({"test": "test"}), 400
-
     results = model.predict(image)
-    json_output = results[0].json()
-
+    json_output = results.pandas().xyxy[0].to_dict(orient="records")  # Convert to a list of dictionaries
     filtered = [{"name": item["name"], "confidence": item["confidence"]} for item in json_output]
+    
     return jsonify(filtered)
 
 @app.route("/", methods=["GET"])
