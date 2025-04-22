@@ -2,3 +2,4 @@ flask
 pillow
 torch
 yolov5
+gunicorn
